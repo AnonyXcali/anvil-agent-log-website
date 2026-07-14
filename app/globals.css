@@ -1,0 +1,251 @@
+:root {
+  --bg: #ffffff;
+  --fg: #1f2328;
+  --muted: #59636e;
+  --border: #d1d9e0;
+  --border-soft: #e7ecf0;
+  --surface: #f6f8fa;
+  --accent: #0969da;
+  --green: #1a7f37;
+
+  --font-body-fallback: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono-fallback: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), var(--font-body-fallback);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.page {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 2.5rem;
+}
+
+/* ---------- Header ---------- */
+
+.masthead {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.masthead-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.site-title {
+  font-size: 1.75rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono), var(--font-mono-fallback);
+  font-size: 0.75rem;
+  color: var(--green);
+}
+
+.status::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background-color: var(--green);
+}
+
+.site-tagline {
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+.masthead-links {
+  margin-top: 0.9rem;
+  font-size: 0.875rem;
+}
+
+.masthead-links .pending {
+  font-family: var(--font-mono), var(--font-mono-fallback);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  padding: 1.9rem 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+}
+
+.section p {
+  color: var(--fg);
+}
+
+.section p + p {
+  margin-top: 0.75rem;
+}
+
+.section p + .plain-list {
+  margin-top: 0.75rem;
+}
+
+.plain-list {
+  list-style: none;
+}
+
+.plain-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.plain-list li::before {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  top: 0.65em;
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+  background-color: var(--border);
+}
+
+/* ---------- Tech stack ---------- */
+
+.stack-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stack-list li {
+  font-family: var(--font-mono), var(--font-mono-fallback);
+  font-size: 0.8125rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+}
+
+/* ---------- Development log ---------- */
+
+.log-intro {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.log-scroll {
+  max-height: 28rem;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.log-scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.log-entry {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.log-entry:last-child {
+  border-bottom: none;
+}
+
+.log-entry-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.2rem;
+}
+
+.log-entry-time {
+  display: block;
+  font-family: var(--font-mono), var(--font-mono-fallback);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.log-entry-description {
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding-top: 2.25rem;
+  }
+
+  .log-scroll {
+    max-height: 24rem;
+    padding: 0 1rem;
+  }
+}

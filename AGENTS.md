@@ -103,6 +103,55 @@ type DevelopmentLogEntry = {
 
 const developmentLogEntries: DevelopmentLogEntry[] = [
   {
+    id: "testing-ui-workflow-console",
+    title: "Improved the workflow testing console",
+    timestamp: "28 July 2026, 02:30",
+    description:
+      "Refined the internal testing interface so streamed progress, approvals, preview links, and debug information are easier to follow during agent runs.",
+  },
+  {
+    id: "supervisor-workflow-streaming",
+    title: "Expanded workflow streaming visibility",
+    timestamp: "27 July 2026, 20:15",
+    description:
+      "Added clearer status updates for long-running agent workflows so planning, editing, verification, and completion can be tracked as they happen.",
+  },
+  {
+    id: "verification-loop-stability",
+    title: "Stabilized edit verification",
+    timestamp: "27 July 2026, 19:20",
+    description:
+      "Improved the verification stage so generated file changes can be checked more reliably before they are promoted back into the preview workspace.",
+  },
+  {
+    id: "precise-remote-editing",
+    title: "Added precise remote file editing",
+    timestamp: "26 July 2026, 15:40",
+    description:
+      "Introduced a safer edit flow that prepares local working copies, protects original files, applies targeted changes, verifies the result, and updates the remote workspace.",
+  },
+  {
+    id: "human-approval-flow",
+    title: "Added human approval before edits",
+    timestamp: "25 July 2026, 22:10",
+    description:
+      "Added a human-in-the-loop checkpoint so proposed project changes can be reviewed and approved before the system applies them.",
+  },
+  {
+    id: "supervisor-agent-flow",
+    title: "Introduced the Supervisor Agent flow",
+    timestamp: "24 July 2026, 18:30",
+    description:
+      "Moved complex frontend requests into a coordinated supervisor flow that can search the project, plan changes, request approval, and hand work to specialized editing agents.",
+  },
+  {
+    id: "ssh-project-tools",
+    title: "Expanded SSH-backed project tools",
+    timestamp: "23 July 2026, 17:50",
+    description:
+      "Added project-scoped remote file operations to support safer preview workspace editing without exposing broad filesystem access.",
+  },
+  {
     id: "docker-react-previews",
     title: "Documented Docker-based React previews",
     timestamp: "14 July 2026, 18:30",
@@ -157,134 +206,17 @@ Each entry should include:
 
 ## Visual Direction
 
-The website should take inspiration from **1950s American editorial and commercial illustration**, resembling a technical journal or engineering bulletin rather than a modern SaaS landing page.
+Use a restrained developer-oriented aesthetic.
 
-The objective is not nostalgia for its own sake, but to create the feeling of reading an engineer's notebook documenting the construction of new technology.
-
-### Design Inspiration
-
-Reference visual influences include:
-
-- Mid-century American editorial illustration
-- Saturday Evening Post artwork
-- 1950s engineering magazines
-- Atomic-age industrial design
-- Vintage laboratory notebooks
-- Mid-century modern graphic design
-- Retro technical manuals
-
-Avoid styles such as:
-
-- Glassmorphism
-- Cyberpunk
-- Futuristic neon
-- Minimal SaaS dashboards
-- Material Design
-- Bootstrap-style admin interfaces
-
-### Colour Palette
-
-Use a restrained mid-century palette.
-
-Examples include:
-
-- Warm ivory / paper background
-- Charcoal typography
-- Forest green accents
-- Burnt orange highlights
-- Muted mustard
-- Soft teal
-- Warm grey borders
-
-Avoid bright gradients, glowing elements, or highly saturated colours.
-
-### Typography
-
-Typography should resemble a printed engineering journal.
-
-- Elegant serif or handwritten display font for the main title
-- Clean sans-serif for body content
-- Monospace only for timestamps, metadata, and technology names
-- Comfortable line height
-- Generous whitespace
-
-Typography should provide most of the visual identity.
-
-### Layout
-
-Use an editorial layout rather than an application dashboard.
-
-- Single reading column
-- Comfortable maximum content width
-- Large margins
-- Consistent spacing rhythm
-- Thin horizontal separators
-- Sections that naturally flow from top to bottom
-
-The page should feel like a beautifully typeset technical article.
-
-### Components
-
-Components should resemble printed paper rather than software widgets.
-
-Use:
-
-- Thin borders
-- Small corner radius
-- Extremely subtle shadows (or none)
-- Soft paper-like surfaces
-- Calm spacing
-
-Avoid:
-
-- Floating cards
-- Heavy elevation
-- Bright coloured panels
-- Oversized rounded corners
-- Decorative UI effects
-
-### Development Log
-
-The development log is the primary focus of the page.
-
-Render it as a vertically scrollable engineering journal.
-
-Each entry should resemble a notebook entry with the following hierarchy:
-
-- Title
-- Timestamp
-- Description
-
-Separate entries with whitespace and subtle dividers.
-
-The log should feel like flipping through an engineering notebook documenting the evolution of the project.
-
-### Motion
-
-Use very little animation.
-
-Allowed:
-
-- Subtle hover transitions
-- Gentle opacity changes
-- Focus transitions
-
-Avoid:
-
-- Parallax
-- Animated backgrounds
-- Scroll-driven effects
-- Excessive transforms
-
-### Overall Feeling
-
-The website should communicate:
-
-> "An engineer documenting the construction of an AI system."
-
-It should feel thoughtful, handcrafted, timeless, and technical.
-
-The repository itself is the product, and the website should reflect an ongoing engineering effort rather than a polished commercial SaaS product.
+- Neutral background
+- High text contrast
+- Clean sans-serif font
+- Optional monospace styling for timestamps and metadata
+- Subtle borders or dividers between log entries
+- Small corner radii
+- Limited shadows
+- No unnecessary animations
+- No image assets required
 
 The development log block should have a sensible maximum height and internal vertical scrolling while the rest of the page remains static.
 
