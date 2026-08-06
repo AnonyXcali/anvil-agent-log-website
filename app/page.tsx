@@ -1,15 +1,31 @@
+import Image from "next/image";
 import { getDevelopmentLogEntries } from "@/lib/development-log";
+import { getShowcaseItems } from "@/lib/showcase";
 import { repositoryUrl, siteStatus } from "@/lib/site";
 
 const repositoryState = [
   "Project workspace management for generated preview work.",
-  "Conversation routing through a core request flow.",
+  "Intent-based routing between instant conversation and project-change flows.",
   "Background job processing for long-running tasks.",
-  "Redis-backed streaming for response and job updates.",
+  "Redis-backed streaming for conversation text, workflow progress, approvals, and job updates.",
   "Postgres persistence for users, projects, conversations, messages, jobs, and generated files.",
-  "Mastra-based agent workflows for source-aware project inspection.",
+  "Mastra-based agents for conversation, source search, planning, editing, verification, and approvals.",
+  "Optional context from public web sources and the rendered project preview.",
   "SSH-backed Docker preview infrastructure for generated React apps.",
-  "React preview generation and preview lifecycle control.",
+  "React preview generation, project editing, and preview lifecycle control.",
+];
+
+const userFlows = [
+  {
+    name: "Instant conversation",
+    description:
+      "The conversation agent responds in short, plain language while text is delivered live to the UI. It can use project context, public web information, or the current preview when relevant.",
+  },
+  {
+    name: "Project change",
+    description:
+      "The supervisor searches the project, presents a plan, waits for approval, then applies and verifies the approved changes before updating the preview.",
+  },
 ];
 
 const techStack = [
@@ -32,8 +48,8 @@ const techStack = [
 ];
 
 const futureWork = [
-  "Route more /core requests into full agentic React code generation.",
-  "Expand agent flows from search-and-instruct behavior toward direct multi-file editing.",
+  "Continue improving the quality and efficiency of the current conversation and project-change flows.",
+  "Expand verification and preview-aware feedback for generated applications.",
   "Improve preview isolation, authenticated preview URLs, and production-safe routing.",
   "Improve project job tracking and frontend polling around long-running work.",
   "Grow specialized tools for planning, editing, testing, building, and deploying generated apps.",
@@ -41,6 +57,7 @@ const futureWork = [
 
 export default function Home() {
   const entries = getDevelopmentLogEntries();
+  const showcase = getShowcaseItems();
 
   return (
     <div className="page">
@@ -51,8 +68,8 @@ export default function Home() {
         </div>
         <p className="site-tagline">
           A backend for AI-assisted project workspaces — where a conversation
-          can become a generated preview, a queued job, or a source-aware
-          implementation plan.
+          can become an immediate streamed answer or a source-aware
+          implementation plan that updates a generated preview.
         </p>
         <p className="masthead-links">
           {repositoryUrl ? (
@@ -75,10 +92,38 @@ export default function Home() {
           </p>
           <p>
             It is built for developers experimenting with agentic project
-            workflows: you talk to the system, and the system turns that
-            conversation into working previews, queued jobs, and plans that
-            understand your source code.
+            workflows: a conversation can become an immediate streamed answer
+            or a source-aware implementation plan that updates a generated
+            preview.
           </p>
+        </section>
+
+        <section className="section" aria-labelledby="showcase-heading">
+          <h2 className="section-title" id="showcase-heading">
+            Built with Anvil
+          </h2>
+          <p className="showcase-intro">
+            Screenshots from React previews generated and served by Anvil.
+          </p>
+          <div className="showcase-grid">
+            {showcase.map((item) => (
+              <figure className="showcase-item" key={item.id}>
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  width={item.width}
+                  height={item.height}
+                  sizes="(max-width: 720px) 100vw, 640px"
+                />
+                <figcaption>
+                  <span className="showcase-title">{item.title}</span>
+                  <span className="showcase-description">
+                    {item.description}
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </section>
 
         <section className="section" aria-labelledby="state-heading">
@@ -95,6 +140,29 @@ export default function Home() {
               <li key={item}>{item}</li>
             ))}
           </ul>
+        </section>
+
+        <section className="section" aria-labelledby="flows-heading">
+          <h2 className="section-title" id="flows-heading">
+            Current user flows
+          </h2>
+          <p>
+            An authenticated user starts from a project conversation. An
+            internal intent step routes the request into one of two
+            experiences:
+          </p>
+          <ul className="plain-list">
+            {userFlows.map((flow) => (
+              <li key={flow.name}>
+                <strong>{flow.name}:</strong> {flow.description}
+              </li>
+            ))}
+          </ul>
+          <p>
+            The testing UI makes both paths observable. It shows the composed
+            response, live workflow status, approval controls, completion or
+            failure state, and the underlying stream events for debugging.
+          </p>
         </section>
 
         <section className="section" aria-labelledby="stack-heading">

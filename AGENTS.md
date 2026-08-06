@@ -6,7 +6,7 @@ Build a minimal public-facing developer log website for this repository. The sit
 
 This should feel like a public build journal: closer to a README, changelog, or engineering notebook than a marketing-heavy SaaS landing page.
 
-Repository link: `TODO: add public repository URL`
+Repository link: `https://github.com/AnonyXcali/anvil`
 
 Status: `Active development`
 
@@ -28,7 +28,7 @@ Suggested deployment target: Vercel
 
 Anvil is a backend for AI-assisted project workspaces. It supports authenticated conversations, routes user requests into background work, and produces React preview sandboxes that can be built and served through Docker-backed infrastructure.
 
-The product is for developers experimenting with agentic project workflows where a conversation can become a generated preview, a queued job, or a source-aware implementation plan.
+The product is for developers experimenting with agentic project workflows where a conversation can become an immediate streamed answer or a source-aware implementation plan that updates a generated preview.
 
 ## Current Repository State
 
@@ -37,13 +37,23 @@ The committed repository currently represents a NestJS backend for authenticated
 At a high level, the system includes:
 
 - Project workspace management for generated preview work.
-- Conversation routing through a core request flow.
+- Intent-based routing between instant conversation and project-change flows.
 - Background job processing for long-running tasks.
-- Redis-backed streaming for response and job updates.
+- Redis-backed streaming for conversation text, workflow progress, approvals, and job updates.
 - Postgres persistence for users, projects, conversations, messages, jobs, and generated files.
-- Mastra-based agent workflows for source-aware project inspection.
+- Mastra-based agents for conversation, source search, planning, editing, verification, and approvals.
+- Optional context from public web sources and the rendered project preview.
 - SSH-backed Docker preview infrastructure for generated React apps.
-- React preview generation and preview lifecycle control.
+- React preview generation, project editing, and preview lifecycle control.
+
+## Current User Flows
+
+An authenticated user starts from a project conversation. An internal intent step routes the request into one of two experiences:
+
+- Instant conversation: the conversation agent responds in short, plain language while text is delivered live to the UI. It can use project context, public web information, or the current preview when relevant.
+- Project change: the supervisor searches the project, presents a plan, waits for approval, then applies and verifies the approved changes before updating the preview.
+
+The testing UI makes both paths observable. It shows the composed response, live workflow status, approval controls, completion or failure state, and the underlying stream events for debugging.
 
 ## Current Tech Stack
 
@@ -68,8 +78,8 @@ At a high level, the system includes:
 
 Future work should stay aligned with the committed repository direction:
 
-- Route more `/core` requests into full agentic React code generation.
-- Expand agent flows from search-and-instruct behavior toward direct multi-file editing.
+- Continue improving the quality and efficiency of the current conversation and project-change flows.
+- Expand verification and preview-aware feedback for generated applications.
 - Improve preview isolation, authenticated preview URLs, and production-safe routing.
 - Improve project job tracking and frontend polling around long-running work.
 - Grow specialized tools for planning, editing, testing, building, and deploying generated apps.
@@ -103,95 +113,109 @@ type DevelopmentLogEntry = {
 
 const developmentLogEntries: DevelopmentLogEntry[] = [
   {
-    id: "testing-ui-workflow-console",
-    title: "Improved the workflow testing console",
-    timestamp: "28 July 2026, 02:30",
+    id: 'chunk-based-conversation-delivery',
+    title: 'Added request-scoped conversation streaming',
+    timestamp: '6 August 2026, 22:36',
     description:
-      "Refined the internal testing interface so streamed progress, approvals, preview links, and debug information are easier to follow during agent runs.",
+      'Improved live conversation delivery so instant replies stay associated with the right request while the testing UI can compose text, show progress, and preserve stream details.',
   },
   {
-    id: "supervisor-workflow-streaming",
-    title: "Expanded workflow streaming visibility",
-    timestamp: "27 July 2026, 20:15",
+    id: 'context-aware-conversation-tools',
+    title: 'Expanded conversational project context',
+    timestamp: '6 August 2026, 21:50',
     description:
-      "Added clearer status updates for long-running agent workflows so planning, editing, verification, and completion can be tracked as they happen.",
+      'Enabled the conversation experience to use project search, relevant public web information, page content, and rendered preview context when answering questions.',
   },
   {
-    id: "verification-loop-stability",
-    title: "Stabilized edit verification",
-    timestamp: "27 July 2026, 19:20",
+    id: 'testing-ui-workflow-console',
+    title: 'Improved the workflow testing console',
+    timestamp: '28 July 2026, 02:30',
     description:
-      "Improved the verification stage so generated file changes can be checked more reliably before they are promoted back into the preview workspace.",
+      'Refined the internal testing interface so streamed progress, approvals, preview links, and debug information are easier to follow during agent runs.',
   },
   {
-    id: "precise-remote-editing",
-    title: "Added precise remote file editing",
-    timestamp: "26 July 2026, 15:40",
+    id: 'supervisor-workflow-streaming',
+    title: 'Expanded workflow streaming visibility',
+    timestamp: '27 July 2026, 20:15',
     description:
-      "Introduced a safer edit flow that prepares local working copies, protects original files, applies targeted changes, verifies the result, and updates the remote workspace.",
+      'Added clearer status updates for long-running agent workflows so planning, editing, verification, and completion can be tracked as they happen.',
   },
   {
-    id: "human-approval-flow",
-    title: "Added human approval before edits",
-    timestamp: "25 July 2026, 22:10",
+    id: 'verification-loop-stability',
+    title: 'Stabilized edit verification',
+    timestamp: '27 July 2026, 19:20',
     description:
-      "Added a human-in-the-loop checkpoint so proposed project changes can be reviewed and approved before the system applies them.",
+      'Improved the verification stage so generated file changes can be checked more reliably before they are promoted back into the preview workspace.',
   },
   {
-    id: "supervisor-agent-flow",
-    title: "Introduced the Supervisor Agent flow",
-    timestamp: "24 July 2026, 18:30",
+    id: 'precise-remote-editing',
+    title: 'Added precise remote file editing',
+    timestamp: '26 July 2026, 15:40',
     description:
-      "Moved complex frontend requests into a coordinated supervisor flow that can search the project, plan changes, request approval, and hand work to specialized editing agents.",
+      'Introduced a safer edit flow that prepares local working copies, protects original files, applies targeted changes, verifies the result, and updates the remote workspace.',
   },
   {
-    id: "ssh-project-tools",
-    title: "Expanded SSH-backed project tools",
-    timestamp: "23 July 2026, 17:50",
+    id: 'human-approval-flow',
+    title: 'Added human approval before edits',
+    timestamp: '25 July 2026, 22:10',
     description:
-      "Added project-scoped remote file operations to support safer preview workspace editing without exposing broad filesystem access.",
+      'Added a human-in-the-loop checkpoint so proposed project changes can be reviewed and approved before the system applies them.',
   },
   {
-    id: "docker-react-previews",
-    title: "Documented Docker-based React previews",
-    timestamp: "14 July 2026, 18:30",
+    id: 'supervisor-agent-flow',
+    title: 'Introduced the Supervisor Agent flow',
+    timestamp: '24 July 2026, 18:30',
     description:
-      "Summarized the preview workflow for generated Vite React projects served through SSH-backed Docker infrastructure.",
+      'Moved complex frontend requests into a coordinated supervisor flow that can search the project, plan changes, request approval, and hand work to specialized editing agents.',
   },
   {
-    id: "ai-edit-planning",
-    title: "Documented AI-generated edit planning",
-    timestamp: "14 July 2026, 17:45",
+    id: 'ssh-project-tools',
+    title: 'Expanded SSH-backed project tools',
+    timestamp: '23 July 2026, 17:50',
     description:
-      "Captured the direction for source-aware agent workflows that inspect project context and produce implementation plans.",
+      'Added project-scoped remote file operations to support safer preview workspace editing without exposing broad filesystem access.',
   },
   {
-    id: "contextual-source-expansion",
-    title: "Documented contextual source expansion",
-    timestamp: "14 July 2026, 16:50",
+    id: 'docker-react-previews',
+    title: 'Documented Docker-based React previews',
+    timestamp: '14 July 2026, 18:30',
     description:
-      "Added a sample log entry describing how nearby source context can support better agent decisions.",
+      'Summarized the preview workflow for generated Vite React projects served through SSH-backed Docker infrastructure.',
   },
   {
-    id: "filename-content-search",
-    title: "Documented filename and content search",
-    timestamp: "14 July 2026, 16:10",
+    id: 'ai-edit-planning',
+    title: 'Documented AI-generated edit planning',
+    timestamp: '14 July 2026, 17:45',
     description:
-      "Added a sample entry for source search capabilities used by agentic project workflows.",
+      'Captured the direction for source-aware agent workflows that inspect project context and produce implementation plans.',
   },
   {
-    id: "bullmq-background-jobs",
-    title: "Documented background job processing",
-    timestamp: "14 July 2026, 15:20",
+    id: 'contextual-source-expansion',
+    title: 'Documented contextual source expansion',
+    timestamp: '14 July 2026, 16:50',
     description:
-      "Summarized queue-backed processing for long-running project and agent tasks.",
+      'Added a sample log entry describing how nearby source context can support better agent decisions.',
   },
   {
-    id: "project-workspaces",
-    title: "Documented project workspace management",
-    timestamp: "14 July 2026, 14:40",
+    id: 'filename-content-search',
+    title: 'Documented filename and content search',
+    timestamp: '14 July 2026, 16:10',
     description:
-      "Added a sample entry for isolated project workspaces used by generated preview flows.",
+      'Added a sample entry for source search capabilities used by agentic project workflows.',
+  },
+  {
+    id: 'bullmq-background-jobs',
+    title: 'Documented background job processing',
+    timestamp: '14 July 2026, 15:20',
+    description:
+      'Summarized queue-backed processing for long-running project and agent tasks.',
+  },
+  {
+    id: 'project-workspaces',
+    title: 'Documented project workspace management',
+    timestamp: '14 July 2026, 14:40',
+    description:
+      'Added a sample entry for isolated project workspaces used by generated preview flows.',
   },
 ];
 ```
@@ -235,6 +259,7 @@ Use semantic page structure and accessible defaults.
 
 - The page immediately answers what Anvil is.
 - The page summarizes the committed repository state without relying on uncommitted files.
+- The page describes the current instant-conversation and project-change flows at a high level.
 - The page lists the current tech stack at a high level.
 - The page shows future implementation direction.
 - The page shows recent development progress as sample local data in reverse chronological order.

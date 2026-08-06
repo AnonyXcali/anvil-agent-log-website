@@ -155,6 +155,50 @@ a:focus-visible {
   background-color: var(--border);
 }
 
+/* ---------- Showcase ---------- */
+
+.showcase-intro {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.showcase-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.showcase-item {
+  margin: 0;
+}
+
+.showcase-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.showcase-item figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.showcase-title {
+  font-weight: 600;
+}
+
+.showcase-title::after {
+  content: " — ";
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.showcase-description {
+  color: var(--muted);
+}
+
 /* ---------- Tech stack ---------- */
 
 .stack-list {

@@ -11,6 +11,20 @@ export type DevelopmentLogEntry = {
 // Git commits, an API, or a database without touching the page.
 const developmentLogEntries: DevelopmentLogEntry[] = [
   {
+    id: "chunk-based-conversation-delivery",
+    title: "Added request-scoped conversation streaming",
+    timestamp: "6 August 2026, 22:36",
+    description:
+      "Improved live conversation delivery so instant replies stay associated with the right request while the testing UI can compose text, show progress, and preserve stream details.",
+  },
+  {
+    id: "context-aware-conversation-tools",
+    title: "Expanded conversational project context",
+    timestamp: "6 August 2026, 21:50",
+    description:
+      "Enabled the conversation experience to use project search, relevant public web information, page content, and rendered preview context when answering questions.",
+  },
+  {
     id: "testing-ui-workflow-console",
     title: "Improved the workflow testing console",
     timestamp: "28 July 2026, 02:30",

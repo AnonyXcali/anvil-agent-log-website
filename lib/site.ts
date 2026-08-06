@@ -1,4 +1,4 @@
-// TODO: add public repository URL, then replace null with the link.
-export const repositoryUrl: string | null = null;
+export const repositoryUrl: string | null =
+  "https://github.com/AnonyXcali/anvil";
 
 export const siteStatus = "Active development";
